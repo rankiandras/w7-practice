@@ -6,7 +6,7 @@ function Country(name, short, population, flag, continent) {
     this.continent = continent;
 }
 
-// --------------Components----------------- //
+// ------------------------Components----------------------------- //
 const header = (logo) => {
     return `
     <header>
@@ -16,32 +16,36 @@ const header = (logo) => {
     `
 };
 
-// country card generator
-const countryCard = (country) => {
+// country card
+
+const countryCard = (name, short, population, flag, continent) => {
     return `
-    <div class='card'>
-        <h1>${country.name}</h1>
-        <h2>${country.short}<h2>
-        <p>${country.continent}</p>
-        <img src='${country.flag}'>
-        <p>${country.population}</p>
+    <div>
+        <h2>${name}</h2>
+        <h2>${short}</h2>
+        <h2>${population}</h2>
+        <img src="${flag}">
+        <h2>${continent}</h2>
     </div>
     `
 }
-// country cards container 
-const countryCards = (contentHTML) => {
-    return `
-    <section class='country-cards'>${contentHTML}</section>
+
+// country cards
+
+const countryCards = (cards) => {
+    return`
+    <div>
+        ${cards}
+    </div>
     `
 }
 
-
 const loadEvent = async _ => {
- //get data   
+ //-------------------Get data-------------------------//   
     const countryRes = await fetch("https://restcountries.com/v3.1/all");
     const countryArr = await countryRes.json();
     
- //process data   
+ //----------------------process data---------------------//   
     let countries = countryArr.map(function (country) {
         return new Country(country.name.common, country.cca3, country.population, country.flags.svg, country.continents[0])
     });
@@ -52,16 +56,15 @@ const loadEvent = async _ => {
  //add header HTML   
     const rootElement = document.getElementById('root')
     rootElement.insertAdjacentHTML('beforeend', header('Countries'))
-    
- // create country HTML
-    let countryHTML = '';
-    countries.forEach(country => {
-        countryHTML += countryCard(country);        
-    });
 
- // add cards HTML
-    rootElement.insertAdjacentHTML('beforeend', countryCards(countryHTML))
+ // add countryCard to HTML   
     
+    let content = '';
+    for (let country of countries) {
+        content += countryCard(country.name, country.short, country.population, country.flag, country.continent)
+    }
+
+    rootElement.insertAdjacentHTML('beforeend', countryCards(content))
 
 }
 
