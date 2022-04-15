@@ -33,3 +33,19 @@
 
 
   /* ------------end of css reset---------- */
+
+input {
+    width: 200px;
+    height: 40px;
+    background-color: wheat;
+    border: solid 1px black;
+    margin: 10px;
+}
+
+button {
+    width: 200px;
+    height: 20px;
+    margin: 10px;
+    background-color: olivedrab;
+    color: white;
+}
