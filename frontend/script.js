@@ -1,35 +1,21 @@
-function init(mathFunction) {
-    
-    var a = 5;
-    var b = 6;
+const formHTML = `
+<form>
+    <input type='text'>
+    <input type='text'>
+    <input type='text'>
+    <button>Button</button>
+</form>
+`;
 
+const form = (htmlStructure) => {
+    return htmlStructure;
+}
 
-    if (a < b) {
-        let c = mathFunction(b, a);
-/*        (function() {
-           var c = b - a;
-           console.log(c);
-       })();*/
-        
-    }else {
-            let c = mathFunction(a, b);
-/*         (function() {
-            var c = a - b;
-        })();*/
-     };
+const loadEvent = () => {
 
-    // console.log(c);
-
+    const rootElement = document.getElementById('root')
+    rootElement.insertAdjacentHTML('beforeend', form(formHTML))
 
 }
 
-const initC = (firstNumber, secondNumber) => {
-    return firstNumber - secondNumber;
-};
-
-const initD = (firstNumber, secondNumber) => {
-    return firstNumber * secondNumber;
-}
-
-init(initD);
-
+window.addEventListener('load', loadEvent)
